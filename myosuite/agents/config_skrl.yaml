@@ -1,0 +1,53 @@
+defaults:
+  - override hydra/launcher: joblib
+
+# task and env
+env:
+  env_name: myoHandPoseRandom-v0
+
+# num_envs
+num_envs: 16384
+
+# logger
+logger:
+  backend: wandb
+  exp_name: myosuite
+  test_interval: 1_000_000
+  num_test_episodes: 5
+
+# agent
+agent:
+  rollouts: 16
+  learning_epochs: 8 
+  mini_batches: 2
+  discount_factor: 0.99
+  lambda: 0.95
+  learning_rate: 1e-3
+  grad_norm_clip: 0.5
+  ratio_clip: 0.2
+  value_clip: 0.2
+  clip_predicted_values: false
+  entropy_loss_scale: 0.0
+  value_loss_scale: 1.0
+  experiment:
+    directory: ""
+    experiment_name: ""
+    write_interval: 250
+    checkpoint_interval: 2000
+    store_separately: false
+    wandb: false
+    wandb_kwargs: {}
+
+
+# model
+model:
+  actor_hidden_dim: 256
+  actor_activation_fn: 
+    _target_: torch.nn.ReLU
+  critic_activation_fn: 
+    _target_: torch.nn.ReLU
+
+# memory
+memory:
+  memory_size: ${agent.rollouts}
+  batch_size: 64

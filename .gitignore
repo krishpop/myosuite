@@ -116,4 +116,6 @@ tags
 .vscode/settings.json
 
 # Media #
-.mp4
+.mp4*.hdf5
+*_processed.xml
+*.hdf5

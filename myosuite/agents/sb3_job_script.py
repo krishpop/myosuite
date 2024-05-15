@@ -16,6 +16,7 @@ from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.logger import configure
 from stable_baselines3.common.vec_env import VecNormalize
 import myosuite
+import myosuite.envs.myo.myobase
 
 import functools
 from in_callbacks import InfoCallback, FallbackCheckpoint, SaveSuccesses, EvalCallback
@@ -44,7 +45,7 @@ def train_loop(job_data) -> None:
             save_code=True,  # optional
         )
 
-    log = configure(f'results_{job_data.env}')
+    log = configure(f'results_{job_data.env}', ["stdout", "tensorboard"])
     
     # Create the vectorized environment and normalize ob
     env = make_vec_env(job_data.env, n_envs=job_data.n_env)
