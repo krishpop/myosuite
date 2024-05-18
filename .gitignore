@@ -119,3 +119,9 @@ tags
 .mp4*.hdf5
 *_processed.xml
 *.hdf5
+**multirun/
+**outputs/
+**runs/
+docs/source/tutorials/SAR/*
+*.tar.gz
+*.mp4

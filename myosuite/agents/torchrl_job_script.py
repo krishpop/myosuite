@@ -27,6 +27,7 @@ from torchrl.envs import (
 )
 from torchrl.envs.libs.gym import GymWrapper
 from torchrl.modules import MLP, ProbabilisticActor, TanhNormal, ValueOperator
+from omegaconf import OmegaConf
 
 # ====================================================================
 # Environment utils
@@ -227,8 +228,9 @@ def main(cfg: "DictConfig"):  # noqa: F821
         exp_name = generate_exp_name("PPO", f"{cfg.logger.exp_name}_{cfg.env.env_name}")
         logger_kwargs = {}
         if cfg.logger.backend == "wandb":
-            logger_kwargs["entity"] = "krshna"
+            logger_kwargs["entity"] = "dmanip-rss"
             logger_kwargs["project"] = "myosuite-trl"
+            logger_kwargs["config"] = OmegaConf.to_container(cfg, resolve=True)
         logger = get_logger(
             cfg.logger.backend, logger_name="ppo", experiment_name=exp_name, wandb_kwargs=logger_kwargs
         )

@@ -1,6 +1,14 @@
 defaults:
   - override hydra/launcher: joblib
 
+hydra:
+  launcher:
+    n_jobs: 10
+    prefer: processes
+    backend: multiprocessing
+  sweeper:
+    max_batch_size: 5
+
 # task and env
 env:
   env_name: myoHandPoseRandom-v0

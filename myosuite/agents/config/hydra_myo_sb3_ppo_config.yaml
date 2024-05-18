@@ -1,6 +1,18 @@
 default:
-    - override hydra/output: local
-    - override hydra/launcher: local
+    # - override hydra/output: local
+    - override hydra/launcher: slurm_rich
+  
+hydra:
+  launcher:
+    timeout_min: 240
+    account: juno
+    partition: juno
+    cpus_per_task: 8
+    tasks_per_node: 
+    gres: gpu:a5000:1
+  job:
+    name: ${job_name}
+
 
 env               :   'myoHandPoseRandom-v0' #myosuite-v1          # placeholder name, not a real env
 algorithm         :   PPO

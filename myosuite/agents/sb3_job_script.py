@@ -45,13 +45,13 @@ def train_loop(job_data) -> None:
             save_code=True,  # optional
         )
 
-    log = configure(f'results_{job_data.env}', ["stdout", "tensorboard"])
+    log = configure(f'results_{job_data.env}', ["stdout", "log", "tensorboard"])
     
     # Create the vectorized environment and normalize ob
     env = make_vec_env(job_data.env, n_envs=job_data.n_env)
     env = VecNormalize(env, norm_obs=True, norm_reward=False, clip_obs=10.)
 
-    eval_env = make_vec_env(job_data.env, n_envs=job_data.n_eval_env)
+    eval_env = make_vec_env(job_data.env, n_envs=job_data.n_eval_env, wrapper_class=)
     eval_env = VecNormalize(eval_env, norm_obs=True, norm_reward=False, clip_obs=10.)
 
     algo = job_data.algorithm
